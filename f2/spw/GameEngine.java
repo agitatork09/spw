@@ -42,18 +42,46 @@ public class GameEngine implements KeyListener, GameReporter{
 	public void start(){
 		timer.start();
 	}
-	
-	private void generateEnemy(){
+	//enemy 
+	/*private void generateEnemy(){
 		Enemy e = new Enemy((int)(Math.random()*390), 30);
+		gp.sprites.add(e);
+		enemies.add(e);
+	}*/
+
+	//enemyYellow
+	private void generateEnemyYellow(){	
+		EnemyYellow e = new EnemyYellow((int)(Math.random()*390), 30);
+		gp.sprites.add(e);
+		enemies.add(e);
+	}
+	//enemyBlue
+	private void generateEnemyBlue(){
+		EnemyBlue e = new EnemyBlue((int)(Math.random()*390), 30);
+		gp.sprites.add(e);
+		enemies.add(e);
+	}
+	//enemyRed
+	private void generateEnemyRed(){
+		EnemyRed e = new EnemyRed((int)(Math.random()*390), 30);
 		gp.sprites.add(e);
 		enemies.add(e);
 	}
 	
 	private void process(){
+		//enemyRed random
 		if(Math.random() < difficulty){
-			generateEnemy();
+			generateEnemyRed();
 		}
-		
+		//enemyYellow random
+		if(Math.random() < difficulty){
+			generateEnemyYellow();	
+		}
+		//enemyBlue random
+		if(Math.random() < difficulty){
+			generateEnemyBlue();	
+		}
+
 		Iterator<Enemy> e_iter = enemies.iterator();
 		while(e_iter.hasNext()){
 			Enemy e = e_iter.next();
@@ -62,7 +90,7 @@ public class GameEngine implements KeyListener, GameReporter{
 			if(!e.isAlive()){
 				e_iter.remove();
 				gp.sprites.remove(e);
-				score += 100;
+				//score += 100;
 			}
 		}
 		
@@ -73,8 +101,14 @@ public class GameEngine implements KeyListener, GameReporter{
 		for(Enemy e : enemies){
 			er = e.getRectangle();
 			if(er.intersects(vr)){
-				die();
-				return;
+				if(e.checkDie()){
+					die();
+					return;
+				}
+				else {
+					score += 100;
+					e.setAlive();
+				}
 			}
 		}
 	}
@@ -86,10 +120,16 @@ public class GameEngine implements KeyListener, GameReporter{
 	void controlVehicle(KeyEvent e) {
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_LEFT:
-			v.move(-1);
+			v.move(-1,0);
 			break;
 		case KeyEvent.VK_RIGHT:
-			v.move(1);
+			v.move(1,0);
+			break;
+		case KeyEvent.VK_UP:
+			v.move(0,-1);
+			break;
+		case KeyEvent.VK_DOWN:
+			v.move(0,1);
 			break;
 		case KeyEvent.VK_D:
 			difficulty += 0.1;

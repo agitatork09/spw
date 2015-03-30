@@ -4,16 +4,12 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-public class Enemy extends Sprite{
+public class EnemyYellow extends Enemy{
 	public static final int Y_TO_FADE = 400;
 	public static final int Y_TO_DIE = 600;
 
-	private int step = 12;
-	private boolean alive = true;
-	private boolean check;
-	public Enemy(int x, int y,boolean check) {
-		super(x, y, 5, 10);
-		this.check = check;
+	public EnemyYellow(int x, int y) {
+		super(x, y,false);
 	}
 
 	@Override
@@ -24,27 +20,9 @@ public class Enemy extends Sprite{
 			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 
 					(float)(Y_TO_DIE - y)/(Y_TO_DIE - Y_TO_FADE)));
 		}
-		g.setColor(Color.RED);
+		g.setColor(Color.YELLOW);
 		g.fillRect(x, y, width, height);
 		
 	}
 
-	public void proceed(){
-		y += step;
-		if(y > Y_TO_DIE){
-			alive = false;
-		}
-	}
-	
-	public boolean isAlive(){
-		return alive;
-	}
-
-	public boolean checkDie(){
-		return check;
-	}
-
-	public void setAlive(){
-		alive = false;
-	}
 }
