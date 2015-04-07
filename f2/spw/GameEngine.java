@@ -94,16 +94,20 @@ public class GameEngine implements KeyListener, GameReporter{
 			}
 		}
 		
-		gp.updateGameUI(this);
+		gp.updateGameUI(this,v);
 		
 		Rectangle2D.Double vr = v.getRectangle();
 		Rectangle2D.Double er;
 		for(Enemy e : enemies){
 			er = e.getRectangle();
 			if(er.intersects(vr)){
-				if(e.checkDie()){
-					die();
-					return;
+				if(e.checkDamage()){
+					v.decreaseHp();
+					e.setAlive();
+					if(v.getHp()==0){
+						die();
+						return;
+					}
 				}
 				else {
 					score += 100;

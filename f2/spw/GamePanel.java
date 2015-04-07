@@ -20,7 +20,7 @@ public class GamePanel extends JPanel {
 		big.setBackground(Color.BLACK);
 	}
 
-	public void updateGameUI(GameReporter reporter){
+	public void updateGameUI(GameReporter reporter,SpaceShip v){
 		big.clearRect(0, 0, 400, 600);
 		
 		big.setColor(Color.WHITE);		
@@ -28,7 +28,8 @@ public class GamePanel extends JPanel {
 		for(Sprite s : sprites){
 			s.draw(big);
 		}
-		
+		big.setColor(Color.RED);
+		big.fillRect(v.x,(v.y + v.height),v.hp*4,v.height/4);
 		repaint();
 	}
 
