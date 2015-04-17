@@ -20,6 +20,7 @@ public class GameEngine implements KeyListener, GameReporter{
 	private Timer timer;
 	
 	private long score = 0;
+	private int lv = 0;
 	private double difficulty = 0.1;
 	
 	public GameEngine(GamePanel gp, SpaceShip v) {
@@ -49,6 +50,12 @@ public class GameEngine implements KeyListener, GameReporter{
 		enemies.add(e);
 	}*/
 
+	//enemyRed
+	private void generateEnemyRed(){
+		EnemyRed e = new EnemyRed((int)(Math.random()*390), 30);
+		gp.sprites.add(e);
+		enemies.add(e);
+	}
 	//enemyYellow
 	private void generateEnemyYellow(){	
 		EnemyYellow e = new EnemyYellow((int)(Math.random()*390), 30);
@@ -61,12 +68,13 @@ public class GameEngine implements KeyListener, GameReporter{
 		gp.sprites.add(e);
 		enemies.add(e);
 	}
-	//enemyRed
-	private void generateEnemyRed(){
-		EnemyRed e = new EnemyRed((int)(Math.random()*390), 30);
+	//enemyGreen
+	private void generateEnemyGreen(){
+		EnemyGreen e = new EnemyGreen((int)(Math.random()*390), 30);
 		gp.sprites.add(e);
 		enemies.add(e);
 	}
+	
 	
 	private void process(){
 		//enemyRed random
@@ -80,6 +88,10 @@ public class GameEngine implements KeyListener, GameReporter{
 		//enemyBlue random
 		if(Math.random() < difficulty){
 			generateEnemyBlue();	
+		}
+		//enemyGreen random
+		if(Math.random() < difficulty){
+			generateEnemyGreen();	
 		}
 
 		Iterator<Enemy> e_iter = enemies.iterator();
@@ -95,7 +107,7 @@ public class GameEngine implements KeyListener, GameReporter{
 		}
 		
 		gp.updateGameUI(this,v);
-		
+
 		Rectangle2D.Double vr = v.getRectangle();
 		Rectangle2D.Double er;
 		for(Enemy e : enemies){
@@ -106,11 +118,15 @@ public class GameEngine implements KeyListener, GameReporter{
 					e.setAlive();
 					if(v.getHp()==0){
 						die();
+						gp.updateGameUI(this,v);
 						return;
 					}
 				}
 				else {
 					score += 100;
+					if((score%1000)==0){
+						lv++;
+					}
 					e.setAlive();
 				}
 			}
@@ -143,6 +159,10 @@ public class GameEngine implements KeyListener, GameReporter{
 
 	public long getScore(){
 		return score;
+	}
+
+	public int getLv(){
+		return lv;
 	}
 	
 	@Override

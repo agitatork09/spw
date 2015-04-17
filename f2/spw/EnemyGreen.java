@@ -8,14 +8,14 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class EnemyRed extends Enemy{
+public class EnemyGreen extends Enemy{
 	public static final int Y_TO_FADE = 400;
 	public static final int Y_TO_DIE = 600;
 
-	public EnemyRed(int x, int y) {
-		super(x, y,true);
+	public EnemyGreen(int x, int y) {
+		super(x, y,false);
 		try {
-			picture = ImageIO.read(new File("f2/spw/picture/lred.png"));
+			picture = ImageIO.read(new File("f2/spw/picture/lgreen.png"));
 		}
 		catch(IOException e){
 			e.printStackTrace();
@@ -30,10 +30,9 @@ public class EnemyRed extends Enemy{
 			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 
 					(float)(Y_TO_DIE - y)/(Y_TO_DIE - Y_TO_FADE)));
 		}
-		//g.setColor(Color.YELLOW);
+		//g.setColor(Color.GREEN);
 		//g.fillRect(x, y, width, height);
 		g.drawImage(picture,x,y,width,height,null);
 	}
-
 
 }

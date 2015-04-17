@@ -3,16 +3,21 @@ package f2.spw;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 public class Enemy extends Sprite{
 	public static final int Y_TO_FADE = 400;
 	public static final int Y_TO_DIE = 600;
 
+	Image picture;
 	private int step = 12;
 	private boolean alive = true;
 	private boolean check;
 	public Enemy(int x, int y,boolean check) {
-		super(x, y, 5, 10);
+		super(x, y, 30, 30);
 		this.check = check;
 	}
 

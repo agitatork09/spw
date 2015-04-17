@@ -3,6 +3,10 @@ package f2.spw;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 public class EnemyBlue extends Enemy{
 	public static final int Y_TO_FADE = 400;
@@ -10,6 +14,12 @@ public class EnemyBlue extends Enemy{
 	
 	public EnemyBlue(int x, int y) {
 		super(x, y,false);
+		try {
+			picture = ImageIO.read(new File("f2/spw/picture/lblue.png"));
+		}
+		catch(IOException e){
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -21,8 +31,9 @@ public class EnemyBlue extends Enemy{
 			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 
 					(float)(Y_TO_DIE - y)/(Y_TO_DIE - Y_TO_FADE)));
 		}
-		g.setColor(Color.BLUE);
-		g.fillRect(x, y, width, height);
+		//g.setColor(Color.YELLOW);
+		//g.fillRect(x, y, width, height);
+		g.drawImage(picture,x,y,width,height,null);
 		
 	}
 
