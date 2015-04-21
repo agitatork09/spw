@@ -38,13 +38,17 @@ public class GamePanel extends JPanel {
 		
 		//score
 		big.setColor(Color.BLACK);		
-		big.drawString(String.format("%08d", reporter.getScore()), 300, 20);
+		big.drawString(String.format("%05d", reporter.getScore()), 300, 20);
 		for(Sprite s : sprites){
 			s.draw(big);
 		}
 		big.setColor(Color.BLACK);
 		big.drawString(String.format("Lv %02d", reporter.getLv()), 50, 20);
+
+
 		//hp
+		big.setColor(Color.RED);
+		big.drawString(String.format("hp : %d/%d", v.hp,v.maxHp), 50, 590);
 		big.setColor(Color.RED);
 		//increse hp
 		//big.fillRect(v.width,v.height-5,(v.width/v.hp),5);

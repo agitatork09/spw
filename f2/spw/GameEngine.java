@@ -15,13 +15,15 @@ public class GameEngine implements KeyListener, GameReporter{
 	GamePanel gp;
 		
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();	
+	private ArrayList<Item> items = new ArrayList<Item>();
 	private SpaceShip v;	
 	
 	private Timer timer;
 	
 	private long score = 0;
 	private int lv = 0;
-	private double difficulty = 0.1;
+	private double difficulty = 0.15;
+	private double difficultyItem = 0.01;
 	
 	public GameEngine(GamePanel gp, SpaceShip v) {
 		this.gp = gp;
@@ -75,23 +77,53 @@ public class GameEngine implements KeyListener, GameReporter{
 		enemies.add(e);
 	}
 	
-	
+	//itemPink
+	private void generateItemPink(){
+		ItemPink it = new ItemPink((int)(Math.random()*390), 30);
+		gp.sprites.add(it);
+		items.add(it);
+	}
+	//itemYellow
+	private void generateItemYellow(){
+		ItemYellow it = new ItemYellow((int)(Math.random()*390), 30);
+		gp.sprites.add(it);
+		items.add(it);
+	}
+	//itemBrown
+	private void generateItemBrown(){
+		ItemBrown it = new ItemBrown((int)(Math.random()*390), 30);
+		gp.sprites.add(it);
+		items.add(it);
+	}
+
 	private void process(){
 		//enemyRed random
 		if(Math.random() < difficulty){
 			generateEnemyRed();
 		}
 		//enemyYellow random
-		if(Math.random() < difficulty){
+		if(Math.random() < 0.05){
 			generateEnemyYellow();	
 		}
 		//enemyBlue random
-		if(Math.random() < difficulty){
+		if(Math.random() < 0.08){
 			generateEnemyBlue();	
 		}
 		//enemyGreen random
 		if(Math.random() < difficulty){
 			generateEnemyGreen();	
+		}
+		//itemPink random
+		if(Math.random() < difficultyItem){
+			generateItemPink();	
+		}
+		//itemYellow random
+		if(Math.random() < difficultyItem){
+			generateItemYellow();	
+		}
+		//itemBrown random
+		if(Math.random() < difficultyItem){
+			generateItemBrown();	
 		}
 
 		Iterator<Enemy> e_iter = enemies.iterator();
@@ -103,6 +135,17 @@ public class GameEngine implements KeyListener, GameReporter{
 				e_iter.remove();
 				gp.sprites.remove(e);
 				//score += 100;
+			}
+		}
+		//Item
+		Iterator<Item> it_iter = items.iterator();
+		while(it_iter.hasNext()){
+			Item it = it_iter.next();
+			it.proceed();
+			
+			if(!it.isAlive()){
+				it_iter.remove();
+				gp.sprites.remove(it);
 			}
 		}
 		
@@ -123,7 +166,7 @@ public class GameEngine implements KeyListener, GameReporter{
 					}
 				}
 				else {
-					score += 100;
+					score += e.getScore();
 					if((score%1000)==0){
 						lv++;
 					}

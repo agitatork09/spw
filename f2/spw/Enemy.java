@@ -11,14 +11,16 @@ import javax.imageio.ImageIO;
 public class Enemy extends Sprite{
 	public static final int Y_TO_FADE = 400;
 	public static final int Y_TO_DIE = 600;
+	int score;
 
 	Image picture;
 	private int step = 12;
 	private boolean alive = true;
 	private boolean check;
-	public Enemy(int x, int y,boolean check) {
+	public Enemy(int x, int y,boolean check,int score) {
 		super(x, y, 30, 30);
 		this.check = check;
+		this.score = score;
 	}
 
 	@Override
@@ -47,6 +49,10 @@ public class Enemy extends Sprite{
 
 	public boolean checkDamage(){
 		return check;
+	}
+
+	public int getScore(){
+		return score;
 	}
 
 	public void setAlive(){

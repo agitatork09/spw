@@ -13,7 +13,7 @@ public class EnemyGreen extends Enemy{
 	public static final int Y_TO_DIE = 600;
 
 	public EnemyGreen(int x, int y) {
-		super(x, y,false);
+		super(x, y,false,50);
 		try {
 			picture = ImageIO.read(new File("f2/spw/picture/lgreen.png"));
 		}

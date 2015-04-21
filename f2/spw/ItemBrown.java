@@ -8,14 +8,15 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class EnemyBlue extends Enemy{
+public class ItemBrown extends Item{
 	public static final int Y_TO_FADE = 400;
 	public static final int Y_TO_DIE = 600;
 	
-	public EnemyBlue(int x, int y) {
-		super(x, y,false,100);
+	Image picture;
+	public ItemBrown(int x, int y) {
+		super(x, y);
 		try {
-			picture = ImageIO.read(new File("f2/spw/picture/lblue.png"));
+			picture = ImageIO.read(new File("f2/spw/picture/clo.png"));
 		}
 		catch(IOException e){
 			e.printStackTrace();

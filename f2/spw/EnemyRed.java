@@ -13,7 +13,7 @@ public class EnemyRed extends Enemy{
 	public static final int Y_TO_DIE = 600;
 
 	public EnemyRed(int x, int y) {
-		super(x, y,true);
+		super(x, y,true,0);
 		try {
 			picture = ImageIO.read(new File("f2/spw/picture/lred.png"));
 		}

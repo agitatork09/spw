@@ -11,8 +11,8 @@ public class Item extends Sprite{
 	private int step = 12;
 	private boolean alive = true;
 	private boolean check;
-	public Item(int x, int y,boolean check) {
-		super(x, y, 5, 10);
+	public Item(int x, int y) {
+		super(x, y, 30, 30);
 		this.check = check;
 	}
 
@@ -38,10 +38,6 @@ public class Item extends Sprite{
 	
 	public boolean isAlive(){
 		return alive;
-	}
-
-	public boolean checkDie(){
-		return check;
 	}
 
 	public void setAlive(){
