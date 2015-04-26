@@ -11,13 +11,16 @@ public class SpaceShip extends Sprite{
 
 	int step = 8;
 	Image picspace;
+	Image picGuard;
 	int maxHp = 5;
 	int hp;
-	
+	boolean ss;
 	public SpaceShip(int x, int y, int width, int height) {
 		super(x, y, width, height);
+		this.ss = true;
 		try {
 			picspace = ImageIO.read(new File("f2/spw/picture/yel.png"));
+			picGuard = ImageIO.read(new File("f2/spw/picture/blue.png"));
 		}
 		catch(IOException e){
 			e.printStackTrace();
@@ -30,11 +33,21 @@ public class SpaceShip extends Sprite{
 	public int getHp(){
 		return hp;
 	}
+	public void setSpaceShip(boolean ss){
+		this.ss = ss;
+	}
+	public boolean getSpaceShip(){
+		return ss;
+	}
 	@Override
 	public void draw(Graphics2D g) {
 		//g.setColor(Color.PINK);
 		//g.fillRect(x, y, width, height);
-		g.drawImage(picspace,x,y,width,height,null);
+		if(ss==true){
+			g.drawImage(picspace,x,y,width,height,null);
+		}
+		else	
+			g.drawImage(picGuard,x,y,width,height,null);
 	}
 
 	public void move(int directionX,int directionY){

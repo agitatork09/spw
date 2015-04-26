@@ -150,7 +150,7 @@ public class GameEngine implements KeyListener, GameReporter{
 		}
 		
 		gp.updateGameUI(this,v);
-
+		//Enemy
 		Rectangle2D.Double vr = v.getRectangle();
 		Rectangle2D.Double er;
 		for(Enemy e : enemies){
@@ -172,6 +172,20 @@ public class GameEngine implements KeyListener, GameReporter{
 					}
 					e.setAlive();
 				}
+			}
+		}
+		//Item
+		Rectangle2D.Double ir;
+		for(Item i : items){
+			ir = i.getRectangle();
+			if(ir.intersects(vr)){
+					if(v.getSpaceShip()==false){
+						v.setSpaceShip(true);
+					}
+					else {
+						v.setSpaceShip(false);
+					}
+					i.setAlive();
 			}
 		}
 	}
