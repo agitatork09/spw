@@ -27,8 +27,11 @@ public class SpaceShip extends Sprite{
 		}
 		hp = maxHp;
 	}
-	public void decreaseHp(){
-		hp--;
+	public void changeHp(int chp){
+		hp += chp;
+		if(hp>maxHp){
+			hp = maxHp;
+		}
 	}
 	public int getHp(){
 		return hp;
@@ -38,6 +41,10 @@ public class SpaceShip extends Sprite{
 	}
 	public boolean getSpaceShip(){
 		return ss;
+	}
+	public void increaseSize(){
+		super.width+=15;
+		super.height+=15;
 	}
 	@Override
 	public void draw(Graphics2D g) {
@@ -58,8 +65,8 @@ public class SpaceShip extends Sprite{
 			x = 400 - width;
 
 		y += (step * directionY);
-		if(y < 0)
-			y = 0;
+		if(y < 30)
+			y = 30;
 		if(y > 650 - width)
 			y = 650 - width;
 

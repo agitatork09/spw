@@ -49,7 +49,7 @@ public class GamePanel extends JPanel {
 
 		//hp
 		big.setColor(Color.RED);
-		big.drawString(String.format("hp : %d/%d", v.hp,v.maxHp), 50, 590);
+		big.drawString(String.format("hp : %d/%d", v.hp,v.maxHp), 50, 583);
 
 		big.setColor(Color.BLACK);
 		big.fillRect(0,584,400,16);

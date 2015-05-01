@@ -13,7 +13,7 @@ import javax.swing.Timer;
 
 public class GameEngine implements KeyListener, GameReporter{
 	GamePanel gp;
-		
+
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();	
 	private ArrayList<Item> items = new ArrayList<Item>();
 	private SpaceShip v;	
@@ -21,9 +21,11 @@ public class GameEngine implements KeyListener, GameReporter{
 	private Timer timer;
 	
 	private long score = 0;
-	private int lv = 0;
+	private int lvOld = 0;
+	private int lvNew = 0;
 	private double difficulty = 0.15;
 	private double difficultyItem = 0.01;
+	private int timeitem;
 	
 	public GameEngine(GamePanel gp, SpaceShip v) {
 		this.gp = gp;
@@ -83,12 +85,6 @@ public class GameEngine implements KeyListener, GameReporter{
 		gp.sprites.add(it);
 		items.add(it);
 	}
-	//itemYellow
-	private void generateItemYellow(){
-		ItemYellow it = new ItemYellow((int)(Math.random()*390), 30);
-		gp.sprites.add(it);
-		items.add(it);
-	}
 	//itemBrown
 	private void generateItemBrown(){
 		ItemBrown it = new ItemBrown((int)(Math.random()*390), 30);
@@ -102,7 +98,7 @@ public class GameEngine implements KeyListener, GameReporter{
 			generateEnemyRed();
 		}
 		//enemyYellow random
-		if(Math.random() < 0.05){
+		if(Math.random() < difficultyItem){
 			generateEnemyYellow();	
 		}
 		//enemyBlue random
@@ -117,12 +113,8 @@ public class GameEngine implements KeyListener, GameReporter{
 		if(Math.random() < difficultyItem){
 			generateItemPink();	
 		}
-		//itemYellow random
-		if(Math.random() < difficultyItem){
-			generateItemYellow();	
-		}
 		//itemBrown random
-		if(Math.random() < difficultyItem){
+		if(Math.random() < 0.005){
 			generateItemBrown();	
 		}
 
@@ -157,7 +149,9 @@ public class GameEngine implements KeyListener, GameReporter{
 			er = e.getRectangle();
 			if(er.intersects(vr)){
 				if(e.checkDamage()){
-					v.decreaseHp();
+					if(v.getSpaceShip()==true){
+						v.changeHp(-1);
+					}
 					e.setAlive();
 					if(v.getHp()==0){
 						die();
@@ -167,48 +161,59 @@ public class GameEngine implements KeyListener, GameReporter{
 				}
 				else {
 					score += e.getScore();
-					if((score%1000)==0){
-						lv++;
-					}
+					lvNew = (int)(score/2000);
 					e.setAlive();
 				}
 			}
+		}
+		processItem();
+		if(lvOld!=lvNew){
+			v.increaseSize();
+			lvOld = lvNew;
 		}
 		//Item
 		Rectangle2D.Double ir;
 		for(Item i : items){
 			ir = i.getRectangle();
 			if(ir.intersects(vr)){
-					if(v.getSpaceShip()==false){
-						v.setSpaceShip(true);
-					}
-					else {
-						v.setSpaceShip(false);
-					}
-					i.setAlive();
+				if(i instanceof ItemBrown){
+					v.setSpaceShip(false);
+					timeitem = 10000;
+				}
+				else if(i instanceof ItemPink){
+					v.changeHp(1);
+				}
+				i.setAlive();
 			}
 		}
 	}
-	
+	private void processItem(){
+		if(timeitem>0){
+			timeitem-=50;
+			if(timeitem==0){
+				v.setSpaceShip(true);
+			}
+		}
+	}
 	public void die(){
 		timer.stop();
 	}
 	
 	void controlVehicle(KeyEvent e) {
 		switch (e.getKeyCode()) {
-		case KeyEvent.VK_LEFT:
+			case KeyEvent.VK_LEFT:
 			v.move(-1,0);
 			break;
-		case KeyEvent.VK_RIGHT:
+			case KeyEvent.VK_RIGHT:
 			v.move(1,0);
 			break;
-		case KeyEvent.VK_UP:
+			case KeyEvent.VK_UP:
 			v.move(0,-1);
 			break;
-		case KeyEvent.VK_DOWN:
+			case KeyEvent.VK_DOWN:
 			v.move(0,1);
 			break;
-		case KeyEvent.VK_D:
+			case KeyEvent.VK_D:
 			difficulty += 0.1;
 			break;
 		}
@@ -219,7 +224,7 @@ public class GameEngine implements KeyListener, GameReporter{
 	}
 
 	public int getLv(){
-		return lv;
+		return lvOld;
 	}
 	
 	@Override

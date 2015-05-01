@@ -16,7 +16,7 @@ public class ItemPink extends Item{
 	public ItemPink(int x, int y) {
 		super(x, y);
 		try {
-			picture = ImageIO.read(new File("f2/spw/picture/clo.png"));
+			picture = ImageIO.read(new File("f2/spw/picture/red.png"));
 		}
 		catch(IOException e){
 			e.printStackTrace();
