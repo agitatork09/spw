@@ -50,11 +50,14 @@ public class GamePanel extends JPanel {
 		//hp
 		big.setColor(Color.RED);
 		big.drawString(String.format("hp : %d/%d", v.hp,v.maxHp), 50, 590);
+
+		big.setColor(Color.BLACK);
+		big.fillRect(0,584,400,16);
+
 		big.setColor(Color.RED);
-		//increse hp
-		//big.fillRect(v.width,v.height-5,(v.width/v.hp),5);
-		big.fillRect(0,590,v.hp*80,10);
+		big.fillRect(5,587,78*v.hp,10);
 		repaint();
+
 	}
 
 	@Override

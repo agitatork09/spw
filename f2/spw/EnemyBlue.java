@@ -15,7 +15,7 @@ public class EnemyBlue extends Enemy{
 	public EnemyBlue(int x, int y) {
 		super(x, y,false,100);
 		try {
-			picture = ImageIO.read(new File("f2/spw/picture/lblue.png"));
+			picture = ImageIO.read(new File("f2/spw/picture/w.png"));
 		}
 		catch(IOException e){
 			e.printStackTrace();

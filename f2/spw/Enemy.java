@@ -18,7 +18,7 @@ public class Enemy extends Sprite{
 	private boolean alive = true;
 	private boolean check;
 	public Enemy(int x, int y,boolean check,int score) {
-		super(x, y, 30, 30);
+		super(x, y, 30, 26);
 		this.check = check;
 		this.score = score;
 	}
