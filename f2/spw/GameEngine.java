@@ -148,19 +148,19 @@ public class GameEngine implements KeyListener, GameReporter{
 		for(Enemy e : enemies){
 			er = e.getRectangle();
 			if(er.intersects(vr)){
-				if(e.checkDamage()){
+				if(!(e instanceof Scoring)){
 					if(v.getSpaceShip()==true){
 						v.changeHp(-1);
 					}
 					e.setAlive();
 					if(v.getHp()==0){
 						die();
-						gp.updateGameUI(this,v);
+						//gp.updateGameUI(this,v);
 						return;
 					}
 				}
 				else {
-					score += e.getScore();
+					score += ((Scoring)(e)).getScore();
 					lvNew = (int)(score/2000);
 					e.setAlive();
 				}
@@ -196,6 +196,9 @@ public class GameEngine implements KeyListener, GameReporter{
 		}
 	}
 	public void die(){
+		
+		gp.gameOver(this);
+		new ShowScore(this);
 		timer.stop();
 	}
 	

@@ -8,17 +8,19 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class EnemyBlue extends Enemy{
+public class EnemyBlue extends Enemy implements Scoring{
 	public static final int Y_TO_FADE = 400;
 	public static final int Y_TO_DIE = 600;
+	public static final int score = 100;
 	
 	public EnemyBlue(int x, int y) {
-		super(x, y,false,100);
+		super(x, y);
 		try {
 			picture = ImageIO.read(new File("f2/spw/picture/w.png"));
 		}
 		catch(IOException e){
 			e.printStackTrace();
+
 		}
 		
 	}
@@ -35,6 +37,9 @@ public class EnemyBlue extends Enemy{
 		//g.fillRect(x, y, width, height);
 		g.drawImage(picture,x,y,width,height,null);
 		
+	}
+	public int getScore(){
+		return score;
 	}
 
 }

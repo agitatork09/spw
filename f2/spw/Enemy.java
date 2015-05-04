@@ -16,11 +16,8 @@ public class Enemy extends Sprite{
 	Image picture;
 	private int step = 12;
 	private boolean alive = true;
-	private boolean check;
-	public Enemy(int x, int y,boolean check,int score) {
+	public Enemy(int x, int y) {
 		super(x, y, 30, 26);
-		this.check = check;
-		this.score = score;
 	}
 
 	@Override
@@ -46,15 +43,6 @@ public class Enemy extends Sprite{
 	public boolean isAlive(){
 		return alive;
 	}
-
-	public boolean checkDamage(){
-		return check;
-	}
-
-	public int getScore(){
-		return score;
-	}
-
 	public void setAlive(){
 		alive = false;
 	}

@@ -43,8 +43,8 @@ public class SpaceShip extends Sprite{
 		return ss;
 	}
 	public void increaseSize(){
-		super.width+=15;
-		super.height+=15;
+		super.width+=5;
+		super.height+=5;
 	}
 	@Override
 	public void draw(Graphics2D g) {
