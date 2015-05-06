@@ -198,7 +198,6 @@ public class GameEngine implements KeyListener, GameReporter{
 	public void die(){
 		
 		gp.gameOver(this);
-		new ShowScore(this);
 		timer.stop();
 	}
 	
@@ -219,7 +218,27 @@ public class GameEngine implements KeyListener, GameReporter{
 			case KeyEvent.VK_D:
 			difficulty += 0.1;
 			break;
+			case KeyEvent.VK_R:
+			restart();
+			break;
 		}
+	}
+
+	public void restart(){
+		score = 0;
+		lvOld = 0;
+		lvNew = 0;
+		difficulty = 0.15;
+		difficultyItem = 0.01;
+		this.gp = gp;
+		this.v = v;
+		enemies.clear();
+		items.clear();
+		gp.sprites.clear();
+		v.changeHp(v.maxHp);
+		gp.sprites.add(v);
+		v.resetSize(35,35);
+		start();
 	}
 
 	public long getScore(){

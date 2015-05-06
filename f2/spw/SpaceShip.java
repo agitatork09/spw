@@ -43,8 +43,13 @@ public class SpaceShip extends Sprite{
 		return ss;
 	}
 	public void increaseSize(){
-		super.width+=5;
-		super.height+=5;
+		width +=5;
+		height +=5;
+	}
+	public void resetSize(int width,int height){
+		super.width = width;
+		super.height = height;
+		//System.out.println("super"+super.width+super.height);
 	}
 	@Override
 	public void draw(Graphics2D g) {
@@ -67,8 +72,8 @@ public class SpaceShip extends Sprite{
 		y += (step * directionY);
 		if(y < 30)
 			y = 30;
-		if(y > 650 - width)
-			y = 650 - width;
+		if(y > 584 - width)
+			y = 584 - width;
 
 	}
 

@@ -45,16 +45,19 @@ public class GamePanel extends JPanel{
    		big.drawImage(background,0,0,null);
 
 		//score
+         big.setFont(new Font("Serif", Font.PLAIN, 16));
    		big.setColor(Color.BLACK);		
    		big.drawString(String.format("%05d", reporter.getScore()), 300, 20);
    		for(Sprite s : sprites){
    			s.draw(big);
    		}
+         big.setFont(new Font("Serif", Font.PLAIN, 16));
    		big.setColor(Color.BLACK);
    		big.drawString(String.format("Lv %02d", reporter.getLv()), 50, 20);
 
 
 		//hp
+         big.setFont(new Font("Serif", Font.PLAIN, 16));
    		big.setColor(Color.RED);
    		big.drawString(String.format("hp : %d/%d", v.hp,v.maxHp), 50, 583);
 
@@ -73,9 +76,10 @@ public class GamePanel extends JPanel{
 
       //score
          big.setColor(Color.BLACK);    
-         big.setFont(new Font("Serif", Font.PLAIN, 50)); 
-
+         big.setFont(new Font("Serif", Font.PLAIN, 50));
          big.drawString(String.format("GAME OVER"), 50, 290);
+         big.setFont(new Font("Serif", Font.PLAIN, 25));
+         big.drawString(String.format("Press \"R\" to restart"), 90, 350);
          repaint();
 
       }
