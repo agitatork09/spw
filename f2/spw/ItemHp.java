@@ -8,12 +8,12 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class ItemBrown extends Item{
+public class ItemHp extends Item{
 	public static final int Y_TO_FADE = 400;
 	public static final int Y_TO_DIE = 600;
 	
 	Image picture;
-	public ItemBrown(int x, int y) {
+	public ItemHp(int x, int y) {
 		super(x, y);
 		try {
 			picture = ImageIO.read(new File("f2/spw/picture/hp.png"));

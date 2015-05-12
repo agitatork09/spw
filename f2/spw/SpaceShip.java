@@ -45,6 +45,7 @@ public class SpaceShip extends Sprite{
 	public void increaseSize(){
 		width +=5;
 		height +=5;
+		step+=2;
 	}
 	public void resetSize(int width,int height){
 		super.width = width;

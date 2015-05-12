@@ -79,15 +79,15 @@ public class GameEngine implements KeyListener, GameReporter{
 		enemies.add(e);
 	}
 	
-	//itemPink
-	private void generateItemPink(){
-		ItemPink it = new ItemPink((int)(Math.random()*390), 30);
+	//itemHp
+	private void generateItemHp(){
+		ItemHp it = new ItemHp((int)(Math.random()*390), 30);
 		gp.sprites.add(it);
 		items.add(it);
 	}
-	//itemBrown
-	private void generateItemBrown(){
-		ItemBrown it = new ItemBrown((int)(Math.random()*390), 30);
+	//itemInvisible
+	private void generateItemInvisible(){
+		ItemInvisible it = new ItemInvisible((int)(Math.random()*390), 30);
 		gp.sprites.add(it);
 		items.add(it);
 	}
@@ -109,13 +109,13 @@ public class GameEngine implements KeyListener, GameReporter{
 		if(Math.random() < difficulty){
 			generateEnemyGreen();	
 		}
-		//itemPink random
+		//itemHp random
 		if(Math.random() < difficultyItem){
-			generateItemPink();	
+			generateItemHp();	
 		}
-		//itemBrown random
+		//itemInvisible random
 		if(Math.random() < 0.005){
-			generateItemBrown();	
+			generateItemInvisible();	
 		}
 
 		Iterator<Enemy> e_iter = enemies.iterator();
@@ -176,11 +176,11 @@ public class GameEngine implements KeyListener, GameReporter{
 		for(Item i : items){
 			ir = i.getRectangle();
 			if(ir.intersects(vr)){
-				if(i instanceof ItemBrown){
+				if(i instanceof ItemInvisible){
 					v.setSpaceShip(false);
-					timeitem = 10000;
+					timeitem = 5000;
 				}
-				else if(i instanceof ItemPink){
+				else if(i instanceof ItemHp){
 					v.changeHp(1);
 				}
 				i.setAlive();
@@ -221,6 +221,9 @@ public class GameEngine implements KeyListener, GameReporter{
 			case KeyEvent.VK_R:
 			restart();
 			break;
+			case KeyEvent.VK_P:
+			pause();
+			break;
 		}
 	}
 
@@ -239,6 +242,18 @@ public class GameEngine implements KeyListener, GameReporter{
 		gp.sprites.add(v);
 		v.resetSize(35,35);
 		start();
+	}
+
+	public void pause(){
+		if(timer.isRunning()){
+			gp.gamePause(this);
+			timer.stop();
+
+
+
+
+		}
+		else timer.start();
 	}
 
 	public long getScore(){

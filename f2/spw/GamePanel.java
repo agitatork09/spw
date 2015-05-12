@@ -79,9 +79,19 @@ public class GamePanel extends JPanel{
          big.setFont(new Font("Serif", Font.PLAIN, 50));
          big.drawString(String.format("GAME OVER"), 50, 290);
          big.setFont(new Font("Serif", Font.PLAIN, 25));
-         big.drawString(String.format("Press \"R\" to restart"), 90, 350);
+         big.drawString(String.format("Level: %d Score: %d", reporter.getLv(), reporter.getScore()), 100, 330);
+         big.setFont(new Font("Serif", Font.PLAIN, 20));
+         big.drawString(String.format("Press \"R\" to restart"), 120, 360);
          repaint();
 
+      }
+      public void gamePause(GameReporter reporter){
+         big.setColor(Color.BLACK);
+         big.setFont(new Font("Serif", Font.PLAIN, 35));
+         big.drawString(String.format("--------PAUSE--------"), 50, 290);
+         big.setFont(new Font("Serif", Font.PLAIN, 25));
+         big.drawString(String.format("Press \"P\" to resume"), 90, 350);
+         repaint();
       }
 
    	@Override
